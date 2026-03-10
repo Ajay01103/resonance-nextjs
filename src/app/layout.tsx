@@ -4,6 +4,7 @@ import "./globals.css"
 import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { ClerkProvider } from "@clerk/nextjs"
+import { TooltipProvider } from "@/components/ui/tooltip"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,7 +33,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <Toaster richColors />
-        <ClerkProvider>{children}</ClerkProvider>
+        <ClerkProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </ClerkProvider>
       </body>
     </html>
   )
