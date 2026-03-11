@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
-import { Geist, Geist_Mono, Inter } from "next/font/google"
+import { Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
-import { cn } from "@/lib/utils"
 import { Toaster } from "@/components/ui/sonner"
 import { ClerkProvider } from "@clerk/nextjs"
 import { TooltipProvider } from "@/components/ui/tooltip"
+import { TRPCReactProvider } from "@/trpc/client"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -32,9 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
-        <Toaster richColors />
         <ClerkProvider>
-          <TooltipProvider>{children}</TooltipProvider>
+          <TRPCReactProvider>
+            <TooltipProvider>
+              {children}
+              <Toaster richColors />
+            </TooltipProvider>
+          </TRPCReactProvider>
         </ClerkProvider>
       </body>
     </html>
