@@ -3,9 +3,9 @@
 import { Coins } from "lucide-react"
 import { useStore } from "@tanstack/react-form"
 
-// import { SettingsDrawer } from "./settings-drawer";
-// import { HistoryDrawer } from "./history-drawer";
-// import { VoiceSelectorButton } from "./voice-selector-button";
+import { SettingsDrawer } from "./settings-drawer"
+import { HistoryDrawer } from "./history-drawer"
+import { VoiceSelectorButton } from "./voice-selector-button"
 
 import { Badge } from "@/components/ui/badge"
 import { Textarea } from "@/components/ui/textarea"
@@ -47,10 +47,10 @@ export function TextInputPanel() {
         {/* Mobile layout */}
         <div className="flex flex-col gap-3 lg:hidden">
           <div className="flex items-center gap-2">
-            {/* <SettingsDrawer> */}
-            {/* <VoiceSelectorButton /> */}
-            {/* </SettingsDrawer> */}
-            {/* <HistoryDrawer /> */}
+            <SettingsDrawer>
+              <VoiceSelectorButton />
+            </SettingsDrawer>
+            <HistoryDrawer />
           </div>
           <GenerateButton
             className="w-full"
