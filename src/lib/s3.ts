@@ -8,13 +8,13 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { env } from "./env"
 
 const s3 = new S3Client({
-  region: "us-east-1",
+  region: env.S3_REGION,
   endpoint: env.S3_ENDPOINT,
   credentials: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
     secretAccessKey: env.S3_SECRET_ACCESS_KEY,
   },
-  forcePathStyle: true, // required for MinIO
+  forcePathStyle: true, // required for Supabase S3
 })
 
 type UploadAudioOptions = {

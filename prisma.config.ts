@@ -10,6 +10,8 @@ export default defineConfig({
     seed: "tsx scripts/seed-system-voices.ts",
   },
   datasource: {
-    url: process.env["DATABASE_URL"],
+    // Migrations require a direct connection (no pgbouncer).
+    // Use DIRECT_URL here; DATABASE_URL (pooler) is used by PrismaClient at runtime.
+    url: process.env["DIRECT_URL"] ?? process.env["DATABASE_URL"],
   },
 })
