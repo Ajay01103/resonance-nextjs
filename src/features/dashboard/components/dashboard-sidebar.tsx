@@ -15,6 +15,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import { Skeleton } from "@/components/ui/skeleton"
+import { VoiceCreateDialog } from "@/features/voices/components/voice-create-dialog"
 import { OrganizationSwitcher, useClerk, UserButton } from "@clerk/nextjs"
 import {
   type LucideIcon,
@@ -128,10 +129,10 @@ export const DashboardSidebar = () => {
 
   return (
     <>
-      {/* <VoiceCreateDialog
-      open={voiceDialogOpen}
-      onOpenChange={setVoiceDialogOpen}
-    /> */}
+      <VoiceCreateDialog
+        open={voiceDialogOpen}
+        onOpenChange={setVoiceDialogOpen}
+      />
       <Sidebar collapsible="icon">
         <SidebarHeader className="flex flex-col gap-4 pt-4">
           <div className="flex items-center gap-2 pl-1 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:pl-0">
