@@ -23,6 +23,7 @@ const SYSTEM_VOICES_DIR = path.join(
 const envSchema = z.object({
   DATABASE_URL: z.string().min(1),
   S3_ENDPOINT: z.url(),
+  S3_REGION: z.string().min(1),
   S3_ACCESS_KEY_ID: z.string().min(1),
   S3_SECRET_ACCESS_KEY: z.string().min(1),
   S3_BUCKET_NAME: z.string().min(1),
@@ -33,14 +34,14 @@ const env = envSchema.parse(process.env)
 const adapter = new PrismaPg({ connectionString: env.DATABASE_URL })
 const prisma = new PrismaClient({ adapter })
 
-const r2 = new S3Client({
-  region: "us-east-1",
+const s3 = new S3Client({
+  region: env.S3_REGION,
   endpoint: env.S3_ENDPOINT,
   credentials: {
     accessKeyId: env.S3_ACCESS_KEY_ID,
     secretAccessKey: env.S3_SECRET_ACCESS_KEY,
   },
-  forcePathStyle: true, // required for MinIO
+  forcePathStyle: true, // required for Supabase S3
 })
 
 interface VoiceMetadata {
@@ -174,7 +175,7 @@ async function uploadSystemVoiceAudio({
     ContentType: contentType,
   }
 
-  await r2.send(new PutObjectCommand(commandInput))
+  await s3.send(new PutObjectCommand(commandInput))
 }
 
 async function seedSystemVoice(name: string) {

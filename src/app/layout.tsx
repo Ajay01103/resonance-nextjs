@@ -3,6 +3,7 @@ import { Geist_Mono, Inter } from "next/font/google"
 import "./globals.css"
 import { Toaster } from "@/components/ui/sonner"
 import { ClerkProvider } from "@clerk/nextjs"
+import { NuqsAdapter } from "nuqs/adapters/next/app"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { TRPCReactProvider } from "@/trpc/client"
 
@@ -34,10 +35,12 @@ export default function RootLayout({
       <body className={`${inter.variable} ${geistMono.variable} antialiased`}>
         <ClerkProvider>
           <TRPCReactProvider>
-            <TooltipProvider>
-              {children}
-              <Toaster richColors />
-            </TooltipProvider>
+            <NuqsAdapter>
+              <TooltipProvider>
+                {children}
+                <Toaster richColors />
+              </TooltipProvider>
+            </NuqsAdapter>
           </TRPCReactProvider>
         </ClerkProvider>
       </body>

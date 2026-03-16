@@ -13,6 +13,9 @@
 # testing
 /coverage
 
+# python
+__pycache__
+
 acc.txt
 
 # next.js
