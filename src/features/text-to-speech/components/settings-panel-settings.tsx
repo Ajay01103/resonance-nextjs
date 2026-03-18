@@ -1,9 +1,11 @@
 "use client"
 
+import { RotateCcw } from "lucide-react"
 import { useStore } from "@tanstack/react-form"
 
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field"
 import { Slider } from "@/components/ui/slider"
+import { Button } from "@/components/ui/button"
 import { useTypedAppFormContext } from "@/hooks/use-app-form"
 
 import { sliders } from "@/features/text-to-speech/data/sliders"
@@ -14,6 +16,12 @@ export function SettingsPanelSettings() {
   const form = useTypedAppFormContext(ttsFormOptions)
   const isSubmitting = useStore(form.store, (s) => s.isSubmitting)
 
+  const handleResetSliders = () => {
+    sliders.forEach((slider) => {
+      form.setFieldValue(slider.id, slider.defaultValue)
+    })
+  }
+
   return (
     <>
       {/* Voice Style Dropdown Section */}
@@ -23,6 +31,18 @@ export function SettingsPanelSettings() {
 
       {/* Voice Adjustments Section */}
       <div className="p-4 flex-1">
+        <div className="mb-4 flex items-center justify-between">
+          <FieldLabel>Adjustments</FieldLabel>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={handleResetSliders}
+            disabled={isSubmitting}
+            className="gap-2">
+            <RotateCcw className="size-3" />
+            Reset
+          </Button>
+        </div>
         <FieldGroup className="gap-8">
           {sliders.map((slider) => (
             <form.Field
